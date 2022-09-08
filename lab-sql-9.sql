@@ -32,17 +32,19 @@ SELECT * FROM sakila.rentals_june;
 
 -- 5. Check the number of rentals for each customer for May.
 
-SELECT customer_id, COUNT(rental_id) AS number_of_rentals
-FROM sakila.rentals_may 
+SELECT rentals_may.customer_id, customer.first_name, customer.last_name, count(rental_id) AS total_number_of_rentals_in_May
+FROM sakila.rentals_may
+JOIN customer ON customer.customer_id = rentals_may.customer_id
 GROUP BY customer_id 
-ORDER BY COUNT(rental_id) DESC;
+ORDER BY count(rental_id) DESC;
 
 -- 6. Check the number of rentals for each customer for June.
 
-SELECT customer_id, COUNT(rental_id) AS number_of_rentals 
-FROM sakila.rentals_june 
+SELECT rentals_june.customer_id, customer.first_name, customer.last_name, count(rental_id) AS total_number_of_rentals_in_June
+FROM sakila.rentals_june
+JOIN customer ON customer.customer_id = rentals_june.customer_id
 GROUP BY customer_id 
-ORDER BY COUNT(rental_id) DESC;
+ORDER BY count(rental_id) DESC;
 
 -- 7. Create a Python connection with SQL database and retrieve the results of the last two queries (also mentioned below) as dataframes:
 
